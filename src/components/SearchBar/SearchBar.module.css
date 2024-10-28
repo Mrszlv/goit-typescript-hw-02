@@ -1,5 +1,10 @@
 .header {
-  background-color: rgba(145, 142, 140, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(145, 142, 140, 0.9);
   margin: 0 auto;
   display: flex;
   flex-direction: row;
