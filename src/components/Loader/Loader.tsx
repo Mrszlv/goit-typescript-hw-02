@@ -5,9 +5,9 @@ const Loader: React.FC = () => (
   <div className={s.load}>
     <RotatingLines
       visible={true}
-      width="30"
-      strokeColor="grey"
-      strokeWidth="2"
+      width="80"
+      strokeColor="white"
+      strokeWidth="4"
       animationDuration="0.75"
       ariaLabel="rotating-lines-loading"
     />
