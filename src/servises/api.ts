@@ -21,7 +21,7 @@ interface ResponseData {
 export const fetchImages = async (
   query: string,
   page: number = 1
-): Promise<ResponseData | any> => {
+): Promise<ResponseData | unknown> => {
   try {
     const response = await axios.get("https://api.unsplash.com/search/photos", {
       params: {
