@@ -1,8 +1,8 @@
 .header {
   position: sticky;
   top: 10px;
-  left: 20px;
-  width: 97%;
+  left: 0;
+  width: 100%;
   border-radius: 10px;
   z-index: 500;
   background-color: rgba(145, 142, 140, 0.9);
