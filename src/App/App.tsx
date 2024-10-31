@@ -13,6 +13,7 @@ import SearchBar from "../components/SearchBar/SearchBar";
 
 const App: React.FC = () => {
   const [images, setImages] = useState<Image[]>([]);
+  const [totalImages, setTotalImages] = useState<number>(0);
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,6 +29,7 @@ const App: React.FC = () => {
       setError(null);
       try {
         const data = await fetchImages(query, page);
+        setTotalImages(data.total);
         setImages((prev) => [...prev, ...data.results]);
       } catch {
         setError("Could not fetch images. Please try again later");
@@ -37,6 +39,8 @@ const App: React.FC = () => {
     };
     getImages();
   }, [query, page]);
+
+  const showLoadMoreBtn = images.length < totalImages;
 
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
@@ -60,9 +64,7 @@ const App: React.FC = () => {
       {error && <ErrorMessage message={error} />}
       <ImageGallery images={images} onImageClick={handleOpenModal} />
       {loading && <Loader />}
-      {images.length > 0 && !loading && (
-        <LoadMoreBtn onClick={handleLoadMore} />
-      )}
+      {showLoadMoreBtn && <LoadMoreBtn onClick={handleLoadMore} />}
       {showModal && selectedImage && (
         <ImageModal
           isOpen={showModal}
