@@ -1,5 +1,4 @@
 import axios from "axios";
-import toast from "react-hot-toast";
 
 export interface Image {
   id: string;
@@ -16,23 +15,23 @@ export interface Image {
 
 interface ResponseData {
   results: Image[];
+  total: number;
 }
 
 export const fetchImages = async (
   query: string,
   page: number = 1
-): Promise<ResponseData | any> => {
-  try {
-    const response = await axios.get("https://api.unsplash.com/search/photos", {
+): Promise<ResponseData> => {
+  const response = await axios.get<ResponseData>(
+    "https://api.unsplash.com/search/photos",
+    {
       params: {
         client_id: "_FGiO_vXXvx1ShKCkjhTMxThVvtc1JA7tmR_UezrG3U",
         query,
         page,
         per_page: 16,
       },
-    });
-    return response.data;
-  } catch {
-    toast.error("Images not found!");
-  }
+    }
+  );
+  return response.data;
 };

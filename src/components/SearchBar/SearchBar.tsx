@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikHelpers } from "formik";
 import toast, { Toaster } from "react-hot-toast";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
@@ -9,15 +9,22 @@ interface SearchBarProps {
   onSubmit: (query: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
-  const handleSubmit = (values: { query: string }, { resetForm }: any) => {
+interface initialValues {
+  query: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }: SearchBarProps) => {
+  const handleSubmit = (
+    values: initialValues,
+    action: FormikHelpers<initialValues>
+  ) => {
     const query = values.query.trim();
     if (query === "") {
       toast.error("Please enter search query!");
       return;
     }
     onSubmit(query);
-    resetForm();
+    action.resetForm();
   };
 
   return (
